@@ -21,8 +21,11 @@
         <junit-jupiter.version>5.3.2</junit-jupiter.version>
         <mockito.version>2.24.0</mockito.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+  		<sonar.projectKey>ashwinisingh25_web-blog-app</sonar.projectKey>
+  		<sonar.organization>ashwini2048</sonar.organization>
+  		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  		<sonar.login>89910e450eb6bc6d8b65bf886007707de08b1f80</sonar.login>
     </properties>
-
 
 	<dependencies>
 		<dependency>
