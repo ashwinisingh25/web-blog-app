@@ -63,7 +63,7 @@ class CruddemoApplicationTests {
 		String username = "landrews@gmail.com";
 		String password = "Password";
 		when(userService.userLogin(username, password)).thenReturn("successful");
-		assertEquals(userService.userLogin(username, password), "success");
+		assertEquals(userService.userLogin(username, password), "successful");
 			
 	}
 	
