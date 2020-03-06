@@ -56,7 +56,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
- 
         </dependency>
 
         <!-- junit 5 -->
@@ -76,10 +75,46 @@
     		<artifactId>springfox-swagger-ui</artifactId>
     		<version>2.9.2</version>
     	</dependency>
-	</dependencies>
-
+    	<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+    </dependencies>
 	<build>
         <plugins>
+       		<plugin>
+       			 <groupId>org.jacoco</groupId>
+       			 <artifactId>jacoco-maven-plugin</artifactId>
+       			 <version>0.7.9</version>
+       			<executions>
+       				<execution>
+            		<id>prepare-agent</id>
+            		<goals>
+                	<goal>prepare-agent</goal>
+            		</goals>
+        		</execution>
+        		<execution>
+            	<id>report</id>
+            	<phase>prepare-package</phase>
+            	<goals>
+                <goal>report</goal>
+            	</goals>
+        		</execution>
+        		<execution>
+        		<id>post-unit-test</id>
+        		<phase>test</phase>
+        		<goals>
+        			<goal>report</goal>
+        		</goals>
+        		<configuration>
+        			<dataFiles>target/jacoco.exec</dataFiles>
+        			<outputDirectory>target/jacoco-ut</outputDirectory>
+        		</configuration>
+        		</execution>	
+    		</executions>
+    		<configuration>
+    			<systemProperty>
+    				<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+    				</systemProperty>
+    		</configuration>
+		</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -91,5 +126,5 @@
             </plugin>
         </plugins>
     </build>
-
+    
 </project>
