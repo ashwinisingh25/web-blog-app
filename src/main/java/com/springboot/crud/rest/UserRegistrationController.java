@@ -3,7 +3,6 @@ package com.springboot.crud.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,7 @@ import com.springboot.crud.service.UserService;
 @RequestMapping("/api")
 public class UserRegistrationController {
 	
-	public UserService userService;
+	private UserService userService;
 	
 	//constructor - injection, passing UserService object as constructor param
 	@Autowired
@@ -38,11 +37,7 @@ public class UserRegistrationController {
 	}
 //	
 	@PostMapping("/register")
-	public String addUser(@RequestBody BlogUsers theBlogUser) {
-		//set userid to 0 for auto-increment of userid
-		//theBlogUser.setUserid(0);
-		
-		//calling registerUser method of service class
+	public String registerUser(@RequestBody BlogUsers theBlogUser) {
 		return userService.registerUser(theBlogUser);	
 	}
 	
@@ -52,7 +47,7 @@ public class UserRegistrationController {
 	}
 	
 	@PostMapping("/login")
-	public void CheckLogin(@RequestBody BlogUsers theblog) {
+	public void userLogin(@RequestBody BlogUsers theblog) {
 		userService.userLogin(theblog.getEmail(), theblog.getPassword());
 	}
 	

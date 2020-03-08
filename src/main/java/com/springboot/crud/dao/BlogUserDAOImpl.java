@@ -38,7 +38,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 		
 		List<BlogUsers>  result = theQuery.getResultList();
 		BlogUsers blog = result.get(0);
-		System.out.println(blog.getEmail());
 		return result;
 	}
 //
@@ -64,8 +63,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 			
 		}
 		catch(ConstraintViolationException ex) {
-			
-			System.out.println("User already exists");
 			return "User already exist";
 		}
 	}
@@ -76,7 +73,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 	public BlogUsers findById(int userid) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		BlogUsers theblog = currentSession.get(BlogUsers.class, userid);
-		System.out.println(theblog.getFirstName());
 		return theblog;
 	}
 
@@ -100,7 +96,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 		}
 		catch(RuntimeException ex) {
 			
-			System.out.println("Login Failed");
 		}
 		return "login successful";
 		
