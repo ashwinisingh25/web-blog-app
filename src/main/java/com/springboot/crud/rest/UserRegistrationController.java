@@ -1,7 +1,6 @@
 package com.springboot.crud.rest;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +16,6 @@ import com.springboot.crud.service.UserService;
 @RequestMapping("/api")
 public class UserRegistrationController {
 	
-	
-	private DataObject dataObject;
 	private UserService userService;
 	
 	//constructor - injection, passing UserService object as constructor param
@@ -47,14 +44,9 @@ public class UserRegistrationController {
 	public BlogUsers getUserById(@PathVariable int userid) throws Exception {
 		
 		BlogUsers theblog = userService.getUserById(userid);
-//		dataObject.setUserid(theblog.getUserid());
-//		dataObject.setFirstName(theblog.getFirstName());
-//		dataObject.setLastName(theblog.getLastName());
-//		dataObject.setEmail(theblog.getEmail());
 		return theblog;	
 	}
 	
-
 	@PostMapping("/login")
 	public void userLogin(@RequestBody BlogUsers theblog) {
 		userService.userLogin(theblog.getEmail(), theblog.getPassword());
