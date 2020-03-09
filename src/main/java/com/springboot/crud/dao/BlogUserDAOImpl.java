@@ -25,6 +25,11 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 	private BlogUsers blog;
 	
 	@Autowired
+	public BlogUserDAOImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Autowired
 	public BlogUserDAOImpl(EntityManager theEntityManager) {
 		entityManager = theEntityManager;
 	
@@ -37,7 +42,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 				currentSession.createQuery("from BlogUsers", BlogUsers.class);
 		
 		List<BlogUsers>  result = theQuery.getResultList();
-		BlogUsers blog = result.get(0);
 		return result;
 	}
 //
@@ -52,8 +56,6 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 //
 	@Override
 	public String  registerUser(BlogUsers theuser) {
-		System.out.println(theuser.getFirstName());
-		System.out.println(theuser.getLastName());
 		try {
 			Session current_session = entityManager.unwrap(Session.class);
 			
@@ -65,6 +67,7 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 		catch(ConstraintViolationException ex) {
 			return "User already exist";
 		}
+		
 	}
 		
 		

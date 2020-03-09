@@ -35,7 +35,7 @@ public class UserRegistrationController {
 	public List<BlogUsers> findAll() {
 		return userService.findAll();
 	}
-//	
+	
 	@PostMapping("/register")
 	public String registerUser(@RequestBody BlogUsers theBlogUser) {
 		return userService.registerUser(theBlogUser);	
