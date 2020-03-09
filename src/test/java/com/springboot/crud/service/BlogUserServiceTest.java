@@ -36,9 +36,9 @@ public class BlogUserServiceTest {
 	}
 	
 	@Test
-	public void testFindById() {
-		when(theBlogUserDAO.findById(1)).thenReturn(new BlogUsers("Lokesh", "Gupta", "lgupta@gmail.com", "pass"));
-		BlogUsers blog = theUserService.findById(1);
+	public void testFindById() throws Exception {
+		when(theBlogUserDAO.getUserById(1)).thenReturn(new BlogUsers("Lokesh", "Gupta", "lgupta@gmail.com", "pass"));
+		BlogUsers blog = theUserService.getUserById(1);
 		System.out.println(blog.getLastName());
 		assertEquals("Gupta", blog.getLastName() );	
 		assertEquals("Lokesh", blog.getFirstName() );	

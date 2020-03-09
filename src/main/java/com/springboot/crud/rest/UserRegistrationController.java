@@ -17,6 +17,8 @@ import com.springboot.crud.service.UserService;
 @RequestMapping("/api")
 public class UserRegistrationController {
 	
+	
+	private DataObject dataObject;
 	private UserService userService;
 	
 	//constructor - injection, passing UserService object as constructor param
@@ -32,20 +34,27 @@ public class UserRegistrationController {
 	}
 	
 	@GetMapping("/users")
-	public List<BlogUsers> findAll() {
-		return userService.findAll();
+	public List<BlogUsers> getAllUsers() {
+		return userService.getAllUsers();
 	}
 	
 	@PostMapping("/register")
-	public String registerUser(@RequestBody BlogUsers theBlogUser) {
+	public BlogUsers registerUser(@RequestBody BlogUsers theBlogUser) throws Exception {
 		return userService.registerUser(theBlogUser);	
 	}
 	
 	@GetMapping("/findbyId/{userid}")
-	public BlogUsers findbyId(@PathVariable int userid) {
-		return userService.findById(userid);
+	public BlogUsers getUserById(@PathVariable int userid) throws Exception {
+		
+		BlogUsers theblog = userService.getUserById(userid);
+//		dataObject.setUserid(theblog.getUserid());
+//		dataObject.setFirstName(theblog.getFirstName());
+//		dataObject.setLastName(theblog.getLastName());
+//		dataObject.setEmail(theblog.getEmail());
+		return theblog;	
 	}
 	
+
 	@PostMapping("/login")
 	public void userLogin(@RequestBody BlogUsers theblog) {
 		userService.userLogin(theblog.getEmail(), theblog.getPassword());

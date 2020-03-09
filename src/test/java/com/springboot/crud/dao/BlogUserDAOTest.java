@@ -34,11 +34,10 @@ public class BlogUserDAOTest {
 		BlogUsers theblog = new BlogUsers();
 		theblog.setFirstName("Andre");
 		theblog.setLastName("Neil");
-		String str = theBlogUserDAO.registerUser(theblog);
+		BlogUsers user = theBlogUserDAO.registerUser(theblog);
 		
-		assertEquals("Successful", str);
-		
-		
+		assertEquals( "Andre", user.getFirstName());
+			
 		
 	}
 	

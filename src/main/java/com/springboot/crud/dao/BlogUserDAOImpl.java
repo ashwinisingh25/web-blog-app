@@ -25,18 +25,13 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 	private BlogUsers blog;
 	
 	@Autowired
-	public BlogUserDAOImpl() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Autowired
 	public BlogUserDAOImpl(EntityManager theEntityManager) {
 		entityManager = theEntityManager;
 	
 	}
 
 	@Override
-	public List<BlogUsers> findAll() {
+	public List<BlogUsers> getAllUsers() {
 		Session currentSession = entityManager.unwrap(Session.class);
 		Query<BlogUsers> theQuery =
 				currentSession.createQuery("from BlogUsers", BlogUsers.class);
@@ -55,25 +50,26 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 //	}
 //
 	@Override
-	public String  registerUser(BlogUsers theuser) {
+	public BlogUsers  registerUser(BlogUsers theuser) {
+		
+		Session current_session = entityManager.unwrap(Session.class);
+		
 		try {
-			Session current_session = entityManager.unwrap(Session.class);
-			
 			current_session.save(theuser);
-			return "Successful";
-			
-			
+				
 		}
 		catch(ConstraintViolationException ex) {
-			return "User already exist";
+			System.out.println("user already exists");
 		}
+		
+		return theuser;
 		
 	}
 		
 		
 		
 	@Override
-	public BlogUsers findById(int userid) {
+	public BlogUsers getUserById(int userid) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		BlogUsers theblog = currentSession.get(BlogUsers.class, userid);
 		return theblog;
@@ -85,20 +81,16 @@ public class BlogUserDAOImpl implements BlogUserDAO {
 		Query<BlogUsers> query = currentSession.createQuery("FROM BlogUsers WHERE email= :email and password= :password", BlogUsers.class);
 		query.setParameter("email", email);
 		query.setParameter("password", password);
-		
-
+	
 		try {
 			
 			if(query.uniqueResult()!=null) {
-				return "login successful";
+				System.out.println("login successful");
 			}
-			else{
-				return "login failed";
-			}	
 			
 		}
 		catch(RuntimeException ex) {
-			
+			System.out.println("login failed");
 		}
 		return "login successful";
 		

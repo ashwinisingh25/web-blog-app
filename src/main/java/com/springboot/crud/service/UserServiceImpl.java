@@ -22,28 +22,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public List<BlogUsers> findAll() {
-		return userDAO.findAll();
+	public List<BlogUsers> getAllUsers() {
+		return userDAO.getAllUsers();
 		
 	}
-//
-//	@Override
-//	@Transactional
-//	public void deleteById(int theId) {
-//		userDAO.deleteById(theId);
-//	}
-//
-	@Override
-	public String registerUser(BlogUsers theuser) {
-		return userDAO.registerUser(theuser);
-	
 
+	@Override
+	public BlogUsers registerUser(BlogUsers theuser) throws Exception {
+		return userDAO.registerUser(theuser);
 	}
 	
 	
 	@Override
-	public BlogUsers findById(int userid) {
-		return userDAO.findById(userid);
+	public BlogUsers getUserById(int userid) throws Exception {
+		return userDAO.getUserById(userid);
 	}
 	
 
@@ -54,4 +46,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+
+	
 }

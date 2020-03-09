@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.springboot.crud.entity.BlogUsers;
+import com.springboot.crud.rest.DataObject;
 import com.springboot.crud.rest.UserRegistrationController;
 import com.springboot.crud.service.UserService;
 
@@ -33,12 +34,12 @@ public class RestApiTest {
 	UserService service;
 	
 	BlogUsers theblog = new BlogUsers("leo", "mckay", "lm@g.com", "pass");
-	
-	//post methods test
+	DataObject dataObject = new DataObject(1, "leo", "mckay", "lm@g.com");
+
 	@Test
 	public void registerUser() throws Exception{
 		
-		Mockito.when(service.registerUser(theblog)).thenReturn("successful");
+		Mockito.when(service.registerUser(theblog)).thenReturn(theblog);
 		
 		String exampleJson = "{\"userid\":\"1\",\"firstname\":\"leo\", \"lastname\":\"mckay\", \"email\":\"lm@g.com\", \"password\":\"pass\"}";
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/register")
@@ -54,7 +55,7 @@ public class RestApiTest {
 	public void getAllUsers() throws Exception {
 		List<BlogUsers> blog = new ArrayList<>();
 		blog.add(theblog);
-		Mockito.when(service.findAll()).thenReturn(blog);
+		Mockito.when(service.getAllUsers()).thenReturn(blog);
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/users").accept(MediaType.APPLICATION_JSON);
 		MvcResult result = mvc.perform(requestBuilder).andReturn();
 		//MockHttpServletResponse response = result.getResponse();
